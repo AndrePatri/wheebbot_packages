@@ -1,17 +1,32 @@
 <?xml version="1.0"?>
 <robot name="wheebbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
   
+  <xacro:arg name="is_gazebo_classic" default="true" />
+
+  <xacro:property name="wheebbot_description_path" value="$(find wheebbot_description)"/>
+
   <!-- Including the parameters file -->
-  <xacro:include filename="$(find wheebbot)/description/urdf/parameters.urdf.xacro" />
+  <xacro:include filename="${wheebbot_description_path}/urdf/parameters.urdf.xacro" />
 
   <!-- Including the macros file -->
-  <xacro:include filename="$(find wheebbot)/description/urdf/macros.urdf.xacro" />
+  <xacro:include filename="${wheebbot_description_path}/urdf/macros.urdf.xacro" />
 
   <!-- Including the materials file -->
-  <!-- <xacro:include filename="$(find wheebbot)/description/urdf/materials.urdf.xacro" /> -->
+  <!-- <xacro:include filename="${wheebbot_description_path}/urdf/materials.urdf.xacro" /> -->
 
-  <!-- Including the gazebo related stuff -->
-  <xacro:include filename="$(find wheebbot)/description/urdf/wheebbot.gazebo.xacro" />
+  <xacro:if value="$(arg is_gazebo_classic)">
+
+    <!-- Including the gazebo related stuff -->
+    <xacro:include filename="${wheebbot_description_path}/urdf/gazebo_spec_tags.xacro" />
+
+  </xacro:if>
+
+  <xacro:unless value="$(arg is_gazebo_classic)">
+
+    <!-- Including the gazebo related stuff -->
+    <xacro:include filename="${wheebbot_description_path}/urdf/ign_spec_tags.xacro" />
+
+  </xacro:unless>
 
   <link name="aux_link">
   </link>
@@ -22,7 +37,7 @@
     <visual>
       <origin xyz="0 ${box_ly/2-leg_extrusion_l_edge/2} ${-(box_lz/2-leg_extrusion_l_edge/2)}" rpy="0 0 ${-pi/2}" />
       <geometry>
-        <mesh filename="package://wheebbot/description/meshes/full_no_knee_no_wheels.dae" scale="1.0 1.0 1.0" />
+        <mesh filename="package://wheebbot_description/meshes/full_no_knee_no_wheels.dae" scale="1.0 1.0 1.0" />
       </geometry>
     </visual>
 
@@ -119,7 +134,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 ${pi/2}" />
       <geometry>
-        <mesh filename="package://wheebbot/description/meshes/wheel_black.dae" scale="1.0 1.0 1.0" />
+        <mesh filename="package://wheebbot_description/meshes/wheel_black.dae" scale="1.0 1.0 1.0" />
       </geometry>
     </visual>
 
@@ -142,7 +157,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 ${-pi/2}" />
       <geometry>
-        <mesh filename="package://wheebbot/description/meshes/wheel_black.dae" scale="1.0 1.0 1.0" />
+        <mesh filename="package://wheebbot_description/meshes/wheel_black.dae" scale="1.0 1.0 1.0" />
       </geometry>
     </visual>
 

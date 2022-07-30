@@ -45,16 +45,6 @@
   <!-- export -->
   <export>
     <build_type>ament_cmake</build_type>
-    
-    <!-- Exporting some gazebo (Classic) environmental variables so that models and meshes are visible -->
-    <!-- Unfortunately, as of now, gazebo_ros does not support exporting also the GAZEBO_RESOURCE_PATH -->   
-    <!-- Also note that exporting "${prefix}/.." as a model path only serves as an hack to allow meshes to be loaded by Gazebo--> 
-
-    <gazebo_ros 
-      gazebo_plugin_path="${prefix}/plugins/gazebo_classic" 
-      gazebo_model_path="${prefix}/description/sdf:${prefix}/.." 
-      gazebo_media_path="${prefix}/../../../../src/wheebbot/media"
-    /> 
   </export>
 
 </package>
