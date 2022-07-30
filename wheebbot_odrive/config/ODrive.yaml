@@ -1,0 +1,83 @@
+# ODrive USB config node
+odrv_axes_USBconfigurator:
+  ros__parameters:
+    config:
+      brake_resistance: 0.0
+      dc_max_negative_current: -1
+      max_regen_current: 100.0
+    
+    can:
+      config:
+        baud_rate: 1000000
+        protocol: 1
+
+    axis0:
+      config:
+        startup_encoder_index_search: True
+        startup_motor_calibration: True
+        startup_encoder_offset_calibration: True
+        startup_closed_loop_control: True
+        startup_homing: False
+        can:
+          node_id: 0
+          encoder_rate_ms: 1.0
+          heartbeat_rate_ms: 1.0
+          idq_rate_ms: 1.0
+      motor:
+          config:
+            current_lim: 10.0
+            pole_pairs: 7
+            torque_constant: 0.03062963 # default on ODrive 0.03999999910593033
+            calibration_current: 10.0 
+            resistance_calib_max_voltage: 2.0 
+            pre_calibrated: True
+      encoder:
+        config:
+          cpr: 8192
+          mode: 0
+          calib_range: 0.05
+          pre_calibrated: False
+          use_index: False
+      controller:
+        config:
+          anticogging:
+            anticogging_enabled: False
+          input_mode: 1
+          control_mode: 1 # 1 torque, 2 vel, 3 position
+          vel_limit: 10.0   
+
+    axis1:
+      config:
+        startup_encoder_index_search: True
+        startup_motor_calibration: True
+        startup_encoder_offset_calibration: True
+        startup_closed_loop_control: True
+        startup_homing: False
+        can:
+          node_id: 1
+          encoder_rate_ms: 1.0
+          heartbeat_rate_ms: 1.0
+          idq_rate_ms: 1.0
+      motor:
+        config:
+          current_lim: 10.0
+          pole_pairs: 7
+          torque_constant: 0.03062963
+          calibration_current: 10.0 
+          resistance_calib_max_voltage: 2.0 
+          pre_calibrated: True
+      encoder:
+        config:
+          cpr: 8192
+          mode: 0 # ENCODER_MODE_INCREMENTAL ->0
+          calib_range: 0.05
+          pre_calibrated: False
+          use_index: False
+      controller:
+        config:
+          anticogging:
+            anticogging_enabled: False
+          input_mode: 1
+          control_mode: 1 # 1 torque, 2 vel, 3 position
+          vel_limit: 10.0
+      
