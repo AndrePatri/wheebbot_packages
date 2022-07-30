@@ -6,9 +6,9 @@
   <!--############## GENERAL INFO ################  -->
 
   <!-- required tags -->
-  <name>wheebbot</name>
+  <name>wheebbot_gazebo</name>
   <version>0.0.1</version>
-  <description>The WheeBBot package</description>
+  <description>Gazebo files for the WheeBBot robot</description>
   <maintainer email="andrepatrizi1b6e6@gmail.com">andreap</maintainer>
   <license>BSD</license>
   <!-- optional -->
@@ -36,7 +36,6 @@
   <exec_depend>ros_ign</exec_depend> <!-- needed by Ignition Gazebo at runtime-->
   <exec_depend>tf2</exec_depend> <!-- needed at runtime-->
   <exec_depend>rviz2</exec_depend> <!-- rviz2 for visualizing the robot; needed at runtime-->
-  <exec_depend>xacro</exec_depend> <!-- xacro for generating the urdf description of the robot at runtime-->
   <exec_depend>joy</exec_depend> <!-- joystick driver package; needed at runtime-->
 
   <!-- test dep -->

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(wheebbot)
+project(wheebbot_gazebo)
 
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
@@ -43,24 +43,12 @@ endif()
 # ament_python_install_package(${PROJECT_NAME})
 
 # Installing directories
-install(DIRECTORY launch description config rviz src include scripts worlds DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
+install(DIRECTORY launch config worlds DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
 
 # Include directories:
-include_directories(include)
+# include_directories(include)
 
 # Installing targets:
-install(PROGRAMS
-  src/odrv_axes_USBconfigurator.py
-  DESTINATION lib/${PROJECT_NAME}
-)
-install(PROGRAMS
-  src/imu_state_publisher.py
-  DESTINATION lib/${PROJECT_NAME}
-)
-install(PROGRAMS
-  src/axes_state_publisher.py
-  DESTINATION lib/${PROJECT_NAME}
-)
 
 # install(TARGETS
 #   talker

@@ -3,59 +3,14 @@
 
 <package format="3"> <!-- ROS2 uses format 3-->
 
-  <!--############## GENERAL INFO ################  -->
-
   <!-- required tags -->
-  <name>wheebbot</name>
+  <name>wheebbot_odrive</name>
   <version>0.0.1</version>
-  <description>The WheeBBot package</description>
+  <description>ODrive-related files for the WheeBBot robot </description>
   <maintainer email="andrepatrizi1b6e6@gmail.com">andreap</maintainer>
   <license>BSD</license>
   <!-- optional -->
   <url type="repository"> https://github.com/AndPatr/WheeBBot-v1 </url>   
   <author email="andrepatrizi1b6e6@gmail.com"> Andrea Patrizi </author>
-
-  <!--############# DEPENDENCIES ################  -->
-
-  <!-- build tool dep -->
-  <buildtool_depend>ament_cmake</buildtool_depend> <!--c++ code-->
-  <buildtool_depend>ament_cmake_python</buildtool_depend> <!-- python code; cmake_python allows the use of CMakerLists also for python. 
-  Alternatively, ament_python can be used -->
-
-  <!-- standard dep -->
-  <depend>rclcpp</depend>  <!-- ROS2 Cpp library -->
-  <depend>rclpy</depend> <!-- ROS2 Python library -->
-
-  <!-- exec dep -->
-  <exec_depend>ros2launch</exec_depend> <!-- helps make sure that the ros2 launch command is available after building your package. It also ensures that all launch file formats are recognized-->
-  <exec_depend>joint_state_publisher</exec_depend> <!-- joint state publisher, needed at runtime-->
-  <exec_depend>joint_state_publisher_gui</exec_depend> <!-- joint state publisher-gui, needed at runtime-->
-  <exec_depend>robot_state_publisher</exec_depend> <!-- robot state publisher, needed at runtime-->
-  <exec_depend>gazebo_ros</exec_depend> <!-- needed by Gazebo Classic at runtime-->
-  <exec_depend>gazebo_plugins</exec_depend> <!-- needed by Gazebo Classic at runtime-->
-  <exec_depend>ros_ign</exec_depend> <!-- needed by Ignition Gazebo at runtime-->
-  <exec_depend>tf2</exec_depend> <!-- needed at runtime-->
-  <exec_depend>rviz2</exec_depend> <!-- rviz2 for visualizing the robot; needed at runtime-->
-  <exec_depend>xacro</exec_depend> <!-- xacro for generating the urdf description of the robot at runtime-->
-  <exec_depend>joy</exec_depend> <!-- joystick driver package; needed at runtime-->
-
-  <!-- test dep -->
-  <test_depend>ament_lint_auto</test_depend>
-  <test_depend>ament_lint_common</test_depend>
-
-  <!-- export -->
-  <export>
-    <build_type>ament_cmake</build_type>
-    
-    <!-- Exporting some gazebo (Classic) environmental variables so that models and meshes are visible -->
-    <!-- Unfortunately, as of now, gazebo_ros does not support exporting also the GAZEBO_RESOURCE_PATH -->   
-    <!-- Also note that exporting "${prefix}/.." as a model path only serves as an hack to allow meshes to be loaded by Gazebo--> 
-
-    <gazebo_ros 
-      gazebo_plugin_path="${prefix}/plugins/gazebo_classic" 
-      gazebo_model_path="${prefix}/description/sdf:${prefix}/.." 
-      gazebo_media_path="${prefix}/../../../../src/wheebbot/media"
-    /> 
-  </export>
 
 </package>

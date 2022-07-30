@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(wheebbot)
+project(wheebbot_arduino)
 
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
@@ -16,11 +16,6 @@ find_package(rclcpp REQUIRED)
 
 find_package(ament_cmake_python REQUIRED)
 find_package(rclpy REQUIRED)
-
-find_package(std_msgs REQUIRED)
-
-find_package(ignition-gazebo6 REQUIRED)
-find_package(xacro REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -43,24 +38,12 @@ endif()
 # ament_python_install_package(${PROJECT_NAME})
 
 # Installing directories
-install(DIRECTORY launch description config rviz src include scripts worlds DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
+# install(DIRECTORY DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
 
 # Include directories:
-include_directories(include)
+# include_directories(include)
 
 # Installing targets:
-install(PROGRAMS
-  src/odrv_axes_USBconfigurator.py
-  DESTINATION lib/${PROJECT_NAME}
-)
-install(PROGRAMS
-  src/imu_state_publisher.py
-  DESTINATION lib/${PROJECT_NAME}
-)
-install(PROGRAMS
-  src/axes_state_publisher.py
-  DESTINATION lib/${PROJECT_NAME}
-)
 
 # install(TARGETS
 #   talker
