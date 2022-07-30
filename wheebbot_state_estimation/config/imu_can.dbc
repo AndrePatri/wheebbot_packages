@@ -1,0 +1,126 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: 
+
+
+BO_ 0 imu_Heartbeat: 8 Vector__XXX
+ SG_ imu_temp : 16|8@1+ (1,0) [0|0] "Celsius" Vector__XXX
+ SG_ orient_cal_status055 : 8|8@1+ (1,0) [0|0] "adimensional" Vector__XXX
+ SG_ orient_cal_status085 : 0|8@1+ (1,0) [0|0] "adimensional" Vector__XXX
+
+BO_ 1 quat_First_Half: 8 Vector__XXX
+ SG_ q_i : 32|32@1+ (1,0) [0|0] "normalized" Vector__XXX
+ SG_ q_w : 0|32@1+ (1,0) [0|0] "normalized" Vector__XXX
+
+BO_ 2 quat_Second_Half: 8 Vector__XXX
+ SG_ q_k : 32|32@1+ (1,0) [0|0] "normalized" Vector__XXX
+ SG_ q_j : 0|32@1+ (1,0) [0|0] "normalized" Vector__XXX
+
+BO_ 3 Euler_First_Half: 8 Vector__XXX
+ SG_ Euler_Pitch : 32|32@1+ (1,0) [0|0] "rad" Vector__XXX
+ SG_ Euler_Yaw : 0|32@1+ (1,0) [0|0] "rad" Vector__XXX
+
+BO_ 4 Euler_Second_Half: 8 Vector__XXX
+ SG_ Is_Deg : 32|32@1+ (1,0) [0|0] "adimensional" Vector__XXX
+ SG_ Euler_Roll : 0|32@1+ (1,0) [0|0] "rad" Vector__XXX
+
+BO_ 5 Gyro_First_Half: 8 Vector__XXX
+ SG_ gyro_y : 32|32@1+ (1,0) [0|0] "rad/s" Vector__XXX
+ SG_ gyro_x : 0|32@1+ (1,0) [0|0] "rad/s" Vector__XXX
+
+BO_ 6 Gyro_Second_Half: 8 Vector__XXX
+ SG_ gyro_z : 0|32@1+ (1,0) [0|0] "rad/s" Vector__XXX
+
+BO_ 7 Linear_Acc_First_Half: 8 Vector__XXX
+ SG_ y_ddot : 32|32@1+ (1,0) [0|0] "m/s^2" Vector__XXX
+ SG_ x_ddot : 0|32@1+ (1,0) [0|0] "m/s^2" Vector__XXX
+
+BO_ 8 Linear_Acc_Second_Half: 8 Vector__XXX
+ SG_ z_ddot : 0|32@1+ (1,0) [0|0] "m/s^2" Vector__XXX
+
+BO_ 9 Grav_First_Half: 8 Vector__XXX
+ SG_ g_y : 32|32@1+ (1,0) [0|0] "m/s^2" Vector__XXX
+ SG_ g_x : 0|32@1+ (1,0) [0|0] "m/s^2" Vector__XXX
+
+BO_ 10 Grav_Second_Half: 8 Vector__XXX
+ SG_ g_z : 0|32@1+ (1,0) [0|0] "m/s^2" Vector__XXX
+
+BO_ 11 Raw_Gyro_First_Half: 8 Vector__XXX
+ SG_ raw_gyro_y : 32|32@1+ (1,0) [0|0] "rad/s" Vector__XXX
+ SG_ raw_gyro_x : 0|32@1+ (1,0) [0|0] "rad/s" Vector__XXX
+
+BO_ 12 Raw_Gyro_Second_Half: 8 Vector__XXX
+ SG_ raw_gyro_z : 0|32@1+ (1,0) [0|0] "rad/s" Vector__XXX
+
+BO_ 13 Raw_Acc_First_Half: 8 Vector__XXX
+ SG_ raw_y_ddot : 32|32@1+ (1,0) [0|0] "m/s^2" Vector__XXX
+ SG_ raw_x_ddot : 0|32@1+ (1,0) [0|0] "m/s^2" Vector__XXX
+
+BO_ 14 Raw_Acc_Second_Half: 8 Vector__XXX
+ SG_ raw_z_ddot : 0|32@1+ (1,0) [0|0] "m/s^2" Vector__XXX
+
+
+
+
+
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+
+
+SIG_VALTYPE_ 1 q_w : 1;
+SIG_VALTYPE_ 1 q_i : 1;
+SIG_VALTYPE_ 2 q_j : 1;
+SIG_VALTYPE_ 2 q_k : 1;
+SIG_VALTYPE_ 3 Euler_Yaw : 1;
+SIG_VALTYPE_ 3 Euler_Pitch : 1;
+SIG_VALTYPE_ 4 Euler_Roll : 1;
+SIG_VALTYPE_ 5 gyro_x : 1;
+SIG_VALTYPE_ 5 gyro_y : 1;
+SIG_VALTYPE_ 6 gyro_z : 1;
+SIG_VALTYPE_ 7 x_ddot : 1;
+SIG_VALTYPE_ 7 y_ddot : 1;
+SIG_VALTYPE_ 8 z_ddot : 1;
+SIG_VALTYPE_ 9 g_x : 1;
+SIG_VALTYPE_ 9 g_y : 1;
+SIG_VALTYPE_ 10 g_z : 1;
+SIG_VALTYPE_ 11 raw_gyro_x : 1;
+SIG_VALTYPE_ 11 raw_gyro_y : 1;
+SIG_VALTYPE_ 12 raw_gyro_z : 1;
+SIG_VALTYPE_ 13 raw_x_ddot : 1;
+SIG_VALTYPE_ 13 raw_y_ddot : 1;
+SIG_VALTYPE_ 14 raw_z_ddot : 1;
+
+
