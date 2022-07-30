@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <model name="my_custom_ground_plane">
+    <static>true</static>
+    <link name="ground_link">
+
+      <collision name="collision">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>100 100</size>
+          </plane>
+        </geometry>
+
+        <!-- <surface>
+            
+          <contact>
+             <ode>
+                <kp>1000000000000000</kp> 
+                <kd>1</kd>
+             </ode>
+             <bullet>
+                <kp>1000000000000000</kp>
+                <kd>1</kd>
+             </bullet>
+          </contact>
+
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+            </ode>
+            <bullet>
+              <friction>1</friction>
+              <friction2>1</friction2>
+            </bullet>
+          </friction>
+        </surface> -->
+
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>100 100</size>
+          </plane>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://my_custom_ground_plane/materials/scripts</uri>
+            <uri>model://my_custom_ground_plane/materials/textures</uri>
+            <name>wood_clear</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

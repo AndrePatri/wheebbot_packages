@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ########### MODEL PLUGINS ############ -->
+
+  <!-- Model control plugin/s -->
+  <!-- <plugin name="libcontrol_plugin" filename="package://wheebbot/plugins/gazebo_classic/wheebbot_test/libcontrol_plugin.so"/> -->
+
+  <!-- joint state publisher (this way gazebo publishes joint states to RViz) -->
+  <gazebo>
+    <plugin name="gazebo_ros_joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <update_rate>20</update_rate>
+      <joint_name>left_wheel_joint</joint_name>
+      <joint_name>right_wheel_joint</joint_name>
+    </plugin>
+  </gazebo>
+
+  <!-- ########### LINK TAGS ############ -->
+
+  <!-- body -->
+  <gazebo reference="body">
+    <mu1 value="${body_mu1_gazebo}" />
+    <mu2 value="${body_mu2_gazebo}" />
+    <kp value="${body_kp_gazebo}" />
+    <kd value="${body_kd_gazebo}" />
+  </gazebo>
+
+  <!-- right wheel -->
+  <gazebo reference="right_wheel">
+    <mu1 value="${wheel_mu1_gazebo}" />
+    <mu2 value="${wheel_mu2_gazebo}" />
+    <kp value="${wheel_kp_gazebo}" />
+    <kd value="${wheel_kd_gazebo}" />
+    <maxContacts value="${wheel_max_contacts_gazebo}" />
+  </gazebo>
+
+  <!-- left wheel -->
+  <gazebo reference="left_wheel">
+    <mu1 value="${wheel_mu1_gazebo}" />
+    <mu2 value="${wheel_mu2_gazebo}" />
+    <kp value="${wheel_kp_gazebo}" />
+    <kd value="${wheel_kd_gazebo}" />
+    <maxContacts value="${wheel_max_contacts_gazebo}" />
+  </gazebo>
+
+</robot>

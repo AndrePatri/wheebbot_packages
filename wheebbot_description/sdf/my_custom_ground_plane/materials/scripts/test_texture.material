@@ -1,0 +1,125 @@
+material wood_light
+{
+  technique
+  {
+    pass
+    {
+      
+      texture_unit
+      {
+        // Relative to the location of the material script
+        texture ../textures/wood_light.png
+        // Repeat the texture over the surface (4 per face)
+        scale 0.008 0.008
+      }
+    }
+  }
+}
+
+material asphalt
+{
+  technique
+  {
+    pass
+    {
+      
+      texture_unit
+      {
+        // Relative to the location of the material script
+        texture ../textures/asphalt.png
+        // Repeat the texture over the surface (4 per face)
+        scale 0.008 0.008
+      }
+    }
+  }
+}
+
+material granite_dark
+{
+  technique
+  {
+    pass
+    {
+      
+      texture_unit
+      {
+        // Relative to the location of the material script
+        texture ../textures/granite_dark.png
+        // Repeat the texture over the surface (4 per face)
+        scale 0.001 0.001
+      }
+    }
+  }
+}
+
+material granite
+{
+  technique
+  {
+    pass
+    {
+      
+      texture_unit
+      {
+        // Relative to the location of the material script
+        texture ../textures/granite.png
+        // Repeat the texture over the surface (4 per face)
+        scale 0.008 0.008
+      }
+    }
+  }
+}
+
+material wood_dark
+{
+  technique
+  {
+    pass
+    {
+      
+      texture_unit
+      {
+        // Relative to the location of the material script
+        texture ../textures/wood_dark.png
+        // Repeat the texture over the surface (4 per face)
+        scale 0.008 0.008
+      }
+    }
+  }
+}
+
+material obliquo_parquet
+{
+  technique
+  {
+    pass
+    {
+      
+      texture_unit
+      {
+        // Relative to the location of the material script
+        texture ../textures/obliquo_parquet.jpg
+        // Repeat the texture over the surface (4 per face)
+        scale 0.008 0.008
+      }
+    }
+  }
+}
+
+material wood_clear
+{
+  technique
+  {
+    pass
+    {
+      
+      texture_unit
+      {
+        // Relative to the location of the material script
+        texture ../textures/wood_clear.jpg
+        // Repeat the texture over the surface (4 per face)
+        scale 0.008 0.008
+      }
+    }
+  }
+}

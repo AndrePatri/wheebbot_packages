@@ -1,0 +1,430 @@
+<?xml version="1.7" ?>
+<% ################# EMBEDDED RUBY CODE BEGINS here #################
+  
+  ######## Function definitions ########
+
+  require "matrix"
+
+  def box_inertia_calc(density, dx, dy, dz)
+    volume = dx * dy * dz
+    mass = density * volume*$profilate_fullness
+    ixx  = mass/12.0 * (dy**2 + dz**2)
+    iyy  = mass/12.0 * (dz**2 + dx**2)
+    izz  = mass/12.0 * (dx**2 + dy**2)
+    ixy  = 0.0
+    ixz  = 0.0
+    iyz  = 0.0
+    output=Vector[mass, ixx, ixy, ixz, iyy, iyz, izz]
+  end
+
+  def a_to_s(v)
+    #converts an array to string (so that it can be used in the sdf file)
+    Array(v).join(" ")
+  end
+
+  ######## Constant definitions ########
+
+  pi=Math::PI # pi greco
+  rho_alluminum=2700 # aluminum density
+  $profilate_fullness=0.6 # % of full area in the profilate section
+
+  mu_static=0.5 # static friction coefficient (wheels' ground contact)
+
+  wheel_damping_coeff=0 # damping of the wheel joint
+  max_contacts_wheel=10 # maximum allowed number of contacts for each wheel
+
+  wheel_radius=0.06 # wheel radius 
+  wheel_depth_collision=0.01 # wheel collision positioning parameter 
+
+  wheel_offset=0.09 # offset of the wheels' collision 
+  wheel_visual_offset=0.1 # offset of the wheels' visual  
+  wheel_interax= 0.28
+  jy_wheel=0.001 #[Kg m^2] # axial moment of inertia of the wheel (it should also include the motor's rotor rotational inertia)
+
+  leg_link_length=0.3
+  leg_link_extension=0.02
+  leg_link_depth=0.02
+
+  model_pose=Vector[0, 0, 0, 0, 0, 0] # initial pose of model's base link during spawn
+
+  # frame parameters
+  
+  frame_box_collision_extension=0.21
+  frame_box_collision_depth=0.16
+  frame_box_collision_height=0.16
+
+  fan_box_collision_extension=0.12
+  fan_box_collision_depth=0.12
+  fan_box_collision_height=0.03
+
+  
+  # link inertial parameters computation
+
+  inertial_par_leg=box_inertia_calc(rho_alluminum, leg_link_length, leg_link_extension, leg_link_depth)
+ 
+  # joint limits
+
+  max_knee_torque=20#maximum joint torque [Nm]
+  max_wheel_torque=2#maximum joint torque [Nm]
+
+  ### LINK PARAMETERS ####
+  wheel_contact_kp=50000000 #default 1e-12; good 50000000;700000;1000000
+  wheel_contact_kd=1 #default 1;good 1;0
+
+  ### Meshes URI###
+  uri_visual_frame='model://WheeBBot_sdf/meshes/full_no_knee_no_wheels.dae'
+  uri_visual_wheel='model://WheeBBot_sdf/meshes/wheel_black.dae'
+ 
+  # wheels
+  mass_wheel=0.6
+  inertia_wheel=Vector[jy_wheel/2.0, 0, 0, jy_wheel, 0, jy_wheel/2.0] #[Jxx Jxy Jxz Jyy Jyz Jzz]
+  cylinder_size_collision_wheel=Vector[wheel_radius, wheel_depth_collision] #radius,lenght respectively
+
+  pose_link_left_wheel=Vector[0,wheel_interax/2.0, wheel_radius, 0, 0, 0]
+  pose_inertial_left_wheel=Vector[0, 0, 0 , 0, 0, 0]
+  pose_collision_left_wheel=Vector[0, 0, 0, pi/2.0,0, 0]
+  pose_visual_left_wheel=Vector[0, 0, 0, 0, 0, pi/2]
+
+  pose_link_right_wheel=Vector[0,-wheel_interax/2.0, wheel_radius, 0, 0, 0]
+  pose_inertial_right_wheel=Vector[0, 0, 0, 0, 0, 0]
+  pose_collision_right_wheel=Vector[0, 0, 0, pi/2.0, 0, 0]
+  pose_visual_right_wheel=Vector[0, 0, 0, 0, 0, -pi/2]
+
+  # leg links
+  size_collision_leg_link=Vector[leg_link_length, leg_link_extension, leg_link_depth] 
+  
+  mass_leg_link=inertial_par_leg[0]
+  inertia_leg_link=Vector[inertial_par_leg[1],inertial_par_leg[2],inertial_par_leg[3],inertial_par_leg[4],inertial_par_leg[5],inertial_par_leg[6]]#[Jxx Jxy Jxz Jyy Jyz Jzz]
+
+  pose_left_leg_link=Vector[0,-(wheel_interax-frame_box_collision_extension)/2,leg_link_length/2,0,pi/2,0]
+  pose_inertial_left_leg_link=Vector[0, 0, 0 , 0, 0, 0]
+  pose_collision_left_leg_link=Vector[0, -0.01, 0, 0, 0, 0]
+  pose_visual_left_leg_link=Vector[0, 0, 0, 0, 0, 0]
+
+  pose_right_leg_link=Vector[0,+(wheel_interax-frame_box_collision_extension)/2,leg_link_length/2,0,pi/2,0]
+  pose_inertial_right_leg_link=Vector[0, 0, 0 , 0, 0, 0]
+  pose_collision_right_leg_link=Vector[0, 0.01, 0, 0, 0, 0]
+  pose_visual_right_leg_link=Vector[0, 0, 0, 0, 0, 0]
+  
+  # frame
+  l_frame=leg_link_length/2.0
+  l_CoM_frame=0.0178
+
+  box_size_collision_frame=Vector[frame_box_collision_depth, frame_box_collision_extension, frame_box_collision_height ]
+  box_size_collision_fan_top=Vector[fan_box_collision_depth, fan_box_collision_extension, fan_box_collision_height ]
+  box_size_collision_fan_back=Vector[fan_box_collision_depth, fan_box_collision_extension, fan_box_collision_height ]
+
+  mass_frame=5
+  inertia_frame=Vector[0.2, 0, 0,  0.1, 0, 0.2] #[Jxx Jxy Jxz Jyy Jyz Jzz]
+  
+  pose_link_frame=Vector[-(leg_link_length+frame_box_collision_height)/2, frame_box_collision_extension/2, 0, pi, 0, 0]
+  pose_inertial_frame=Vector[0, 0, 0, 0, 0, 0]
+  pose_collision_frame=Vector[0, 0, 0, 0, 0, 0]
+  pose_collision_fan_top=Vector[0, 0, (frame_box_collision_height+fan_box_collision_height)/2, 0, 0, 0]
+  pose_collision_fan_back=Vector[-(frame_box_collision_height+fan_box_collision_height)/2, 0, 0, 0, pi/2, 0]
+  pose_visual_frame=Vector[0.07,-0.095 , 0, -pi/2, 0, pi/2]
+
+  # joint parameters
+  pose_left_wheel_hinge=Vector[0, 0, 0, 0, 0, 0]
+  pose_right_wheel_hinge=Vector[0, 0, 0, 0, 0, 0]
+
+  axis_left_wheel_hinge=Vector[0, 1, 0]
+  axis_right_wheel_hinge=Vector[0, 1, 0]
+
+  pose_left_leg2frame_joint=Vector[0, 0, 0, 0, 0, 0]
+  pose_right_leg2frame_joint=Vector[0, 0, 0, 0, 0, 0]
+  
+#################EMBEDDED RUBY CODE ENDS here ################# 
+%>
+<sdf version="1.7">
+
+  <model name="WheeBBot_sdf">
+
+    <pose> <%=a_to_s(model_pose ) %> </pose>
+
+    <static>false</static>
+
+    <!-Links -->
+
+    <link name='left_wheel'>
+          <pose> <%=a_to_s(pose_link_left_wheel ) %> </pose>
+          <inertial>
+            <pose><%=a_to_s(pose_inertial_left_wheel )%> </pose>
+            <mass><%=mass_wheel%></mass>
+            <inertia>
+              <ixx><%=inertia_wheel[0]%></ixx>
+              <ixy><%=inertia_wheel[1]%></ixy>
+              <ixz><%=inertia_wheel[2]%></ixz>
+              <iyy><%=inertia_wheel[3]%></iyy>
+              <iyz><%=inertia_wheel[4]%></iyz>
+              <izz><%=inertia_wheel[5]%></izz>
+            </inertia>
+          </inertial>
+          <collision name='collision_left_wheel'>
+            <max_contacts> <%=max_contacts_wheel %> </max_contacts> 
+            <pose><%=a_to_s(pose_collision_left_wheel )%>  </pose>
+            <geometry>
+              <cylinder>
+                <radius><%=cylinder_size_collision_wheel [0]%> </radius>
+                <length><%=cylinder_size_collision_wheel [1]%></length>
+              </cylinder>
+            </geometry>
+            <surface>
+              <friction>
+                <ode>
+                  <mu><%=mu_static%></mu>
+                  <mu2><%=mu_static%></mu2>
+                  <!--<fdir1>1 0 0</fdir1>
+                  <slip1>0.0</slip1>
+                  <slip2>0.0</slip2>-->
+                </ode>
+                <bullet>
+                  <friction><%=mu_static%></friction>
+                  <friction2><%=mu_static%></friction2>
+                  <!--<fdir1>0 0 0</fdir1>-->
+                  <!--<slip1>0.0</slip1>-->
+                  <!--<slip2>0.0</slip2>-->
+                </bullet>
+
+              </friction>
+
+              <contact>
+                <ode>
+                  <!--<max_vel>100</max_vel>
+                  <min_depth>0.001</min_depth>-->
+                  <kp><%=wheel_contact_kp%> </kp>
+                  <kd><%=wheel_contact_kd%></kd>
+                </ode>
+                <bullet>
+                  <kp><%=wheel_contact_kp%></kp>
+                  <kd><%=wheel_contact_kd%></kd>
+                </bullet>
+              </contact>
+            </surface>
+          </collision>
+          <visual name='visual_left_wheel'>
+            <pose><%=a_to_s(pose_visual_left_wheel)%>  </pose>
+            <geometry>
+              <mesh>
+                <uri><%=uri_visual_wheel%></uri>
+              </mesh>
+           </geometry>
+          </visual>
+    </link>
+
+    <link name='right_wheel'>
+          <max_contacts> <%=max_contacts_wheel %> </max_contacts> 
+          <pose> <%=a_to_s(pose_link_right_wheel ) %> </pose>
+          <inertial>
+            <pose><%=a_to_s(pose_inertial_right_wheel )%> </pose>
+            <mass><%=mass_wheel%></mass>
+            <inertia>
+              <ixx><%=inertia_wheel[0]%></ixx>
+              <ixy><%=inertia_wheel[1]%></ixy>
+              <ixz><%=inertia_wheel[2]%></ixz>
+              <iyy><%=inertia_wheel[3]%></iyy>
+              <iyz><%=inertia_wheel[4]%></iyz>
+              <izz><%=inertia_wheel[5]%></izz>
+            </inertia>
+          </inertial>
+          <collision name='collision_right_wheel'>
+            <pose><%=a_to_s(pose_collision_right_wheel )%>  </pose>
+            <geometry>
+              <cylinder>
+                <radius><%=cylinder_size_collision_wheel [0]%> </radius>
+                <length><%=cylinder_size_collision_wheel [1]%></length>
+              </cylinder>
+            </geometry>
+            <surface>
+              <friction>
+                <ode>
+                  <mu><%=mu_static%></mu>
+                  <mu2><%=mu_static%></mu2>
+                  <!--<fdir1>1 0 0</fdir1>
+                  <slip1>0.0</slip1>
+                  <slip2>0.0</slip2>-->
+                </ode>
+                <bullet>
+                  <friction><%=mu_static%></friction>
+                  <friction2><%=mu_static%></friction2>
+                  <!--<fdir1>1 0 0</fdir1>-->
+                  <!--<slip1>0.0</slip1>-->
+                  <!--<slip2>0.0</slip2>-->
+                </bullet>
+              </friction>
+              <contact>
+                <ode>
+                  <!--<max_vel>100</max_vel>
+                  <min_depth>0.001</min_depth>-->
+                  <kp><%=wheel_contact_kp%></kp>
+                  <kd><%=wheel_contact_kd%></kd>
+                </ode>
+                <bullet>
+                  <kp><%=wheel_contact_kp%></kp>
+                  <kd><%=wheel_contact_kd%></kd>
+                </bullet>
+              </contact>
+            </surface>
+          </collision>
+          <visual name='visual_right_wheel'>
+            <pose><%=a_to_s(pose_visual_right_wheel)%>  </pose>
+            <geometry>
+              <mesh>
+                <uri><%=uri_visual_wheel%></uri>
+              </mesh>
+           </geometry>
+          </visual>
+
+    </link>
+
+    <link name='left_leg_link'>
+        <pose relative_to='left_wheel'> <%=a_to_s(pose_left_leg_link ) %> </pose>
+        <inertial>
+          <pose><%=a_to_s(pose_inertial_left_leg_link )%> </pose>
+          <mass><%=mass_leg_link%></mass>
+          <inertia>
+            <ixx><%=inertia_leg_link[0]%></ixx>
+            <ixy><%=inertia_leg_link[1]%></ixy>
+            <ixz><%=inertia_leg_link[2]%></ixz>
+            <iyy><%=inertia_leg_link[3]%></iyy>
+            <iyz><%=inertia_leg_link[4]%></iyz>
+            <izz><%=inertia_leg_link[5]%></izz>
+          </inertia>
+        </inertial>
+        <collision name='collision_left_leg'>
+          <pose relative_to='left_leg_link' ><%=a_to_s(pose_collision_left_leg_link)%>  </pose>
+          <geometry>
+            <box>
+              <size> <%=a_to_s(size_collision_leg_link) %> </size>
+            </box>
+          </geometry>
+        </collision>
+    </link>
+
+    <link name='right_leg_link'>
+          <pose relative_to='right_wheel'> <%=a_to_s(pose_right_leg_link ) %> </pose>
+          <inertial>
+            <pose><%=a_to_s(pose_inertial_right_leg_link )%> </pose>
+            <mass><%=mass_leg_link%></mass>
+            <inertia>
+              <ixx><%=inertia_leg_link[0]%></ixx>
+              <ixy><%=inertia_leg_link[1]%></ixy>
+              <ixz><%=inertia_leg_link[2]%></ixz>
+              <iyy><%=inertia_leg_link[3]%></iyy>
+              <iyz><%=inertia_leg_link[4]%></iyz>
+              <izz><%=inertia_leg_link[5]%></izz>
+            </inertia>
+          </inertial>
+          <collision name='collision_right_leg'>
+            <pose relative_to='right_leg_link'><%=a_to_s(pose_collision_right_leg_link)%>  </pose>
+            <geometry>
+              <box>
+                <size> <%=a_to_s(size_collision_leg_link) %> </size>
+              </box>
+            </geometry>
+          </collision>
+          
+    </link>
+
+    <link name='frame_link'>
+        <pose relative_to='right_leg_link'> <%=a_to_s(pose_link_frame ) %> </pose>
+        <inertial>
+          <pose> <%=a_to_s(pose_inertial_frame ) %> </pose>
+          <mass> <%=mass_frame%> </mass>
+          <inertia>
+            <ixx><%=inertia_frame[0]%></ixx>
+            <ixy><%=inertia_frame[1]%></ixy>
+            <ixz><%=inertia_frame[2]%></ixz>
+            <iyy><%=inertia_frame[3]%></iyy>
+            <iyz><%=inertia_frame[4]%></iyz>
+            <izz><%=inertia_frame[5]%></izz>
+          </inertia>
+        </inertial>
+        <collision name='collision1'>
+          <pose><%=a_to_s(pose_collision_frame) %></pose>
+          <geometry>
+            <box>
+              <size> <%=a_to_s(box_size_collision_frame) %> </size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision2'>
+          <pose><%=a_to_s(pose_collision_fan_back) %></pose>
+          <geometry>
+            <box>
+              <size> <%=a_to_s(box_size_collision_fan_back) %> </size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision3'>
+          <pose><%=a_to_s(pose_collision_fan_top) %></pose>
+          <geometry>
+            <box>
+              <size> <%=a_to_s(box_size_collision_fan_top) %> </size>
+            </box>
+          </geometry>
+        </collision> 
+        <visual name='visual_frame'>
+            <pose><%=a_to_s(pose_visual_frame)%>  </pose>
+            <geometry>
+              <mesh>
+                <uri><%=uri_visual_frame%></uri>
+              </mesh>
+           </geometry>
+          </visual>
+        
+    </link> 
+
+    <!--Joints -->
+
+    <joint type="revolute" name="left_wheel_hinge">
+      <pose><%=a_to_s(pose_left_wheel_hinge)%></pose>
+      <child>left_wheel</child>
+      <parent>left_leg_link</parent>
+      <axis>
+        <xyz><%=a_to_s(axis_left_wheel_hinge)%></xyz>
+        <dynamics>
+          <!--<damping> <%= wheel_damping_coeff  %> </damping>
+          <spring_reference> 0 </spring_reference>
+          <spring_stiffness> 0 </spring_stiffness>-->
+        </dynamics>
+        <limit>
+          <!--<lower>  </lower>
+          <upper>  </upper>
+          <effort> </effort>-->
+        </limit>
+      </axis>
+    </joint>
+
+    <joint type="revolute" name="right_wheel_hinge">
+      <pose><%=a_to_s(pose_right_wheel_hinge)%></pose>
+      <child>right_wheel</child>
+      <parent>right_leg_link</parent>
+      <axis>
+        <xyz><%=a_to_s(axis_right_wheel_hinge)%></xyz>
+        <dynamics>
+          <!--<damping> <%= wheel_damping_coeff  %> </damping>
+          <spring_reference>  </spring_reference>
+          <spring_stiffness>  0 </spring_stiffness>-->
+        </dynamics>
+        <limit>
+          <!--<lower> </lower>
+          <upper> </upper>
+          <effort> </effort>-->
+        </limit>
+      </axis>
+    </joint>
+
+    <joint type="fixed" name="left_leg2frame_joint">
+      <parent>frame_link</parent>
+      <child>left_leg_link</child>
+    </joint>
+
+    <joint type="fixed" name="right_leg2frame_joint">
+      <parent>frame_link</parent>
+      <child>right_leg_link</child>
+    </joint>
+
+
+  </model>
+</sdf>

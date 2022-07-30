@@ -1,0 +1,33 @@
+Conversione Solid Edge in obj
+Data: domenica,luglio 04,2021 10:24
+File di output: C:\Users\andre\Desktop\tesi\CAD\Gazebo\wheel_full.obj
+Autore: Sconosciuto
+Organizzazione: Sconosciuto
+Sistema sorgente: SOLID EDGE
+
+Hardware:
+Processore: Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz
+Sistema operativo: Windows 10 Professional
+Memoria installata: 15.89 GB
+
+Informazioni sul software:
+Versione Parasolid: 32.1.222
+Versione PSBodyshop: 32.1.94
+Versione adattatore OBJ: 5.0.100
+Versione Solid Edge: 221.00.00.114 x64
+
+Opzioni di esportazione OBJ:
+Esporta solidi di costruzione:Off
+Esporta parti visualizzate:Off
+Esporta lamiere costruzione:Off
+Abilita registrazione:On
+Esporta finiture:Off
+Esporta assieme spianato:On
+Unità di esportazione:Meters
+Esporta valore di tolleranza:0.001000
+Esporta tipo di tolleranza:Fine
+Esporta valore angolo piano superficie:0.523599
+
+Avanzamento conversione:
+Processo di conversione completato
+Tempo necessario per la conversione:00 : 00 : 06

@@ -1,0 +1,50 @@
+wheebbot:
+
+  pendulum_mass: 5.0 # upper body equivalent pendulum mass
+  pendulum_length: 0.20 # upper body pendulum length (wheels to CoM)
+  pendulum_width: 0.1 # used to compute the inertia of the pendulum
+  pendulum_depth: 0.1 # used to compute the inertia of the pendulum
+  pendulum_CoM_pitch_offset: 0.0 # pitch offset angle w.r.t. the IMU zero pitch angle reference (basically, the body link)
+  
+  wheel_mass: 0.6
+  wheel_radius: 0.06
+  wheel_thickness: 0.02 # wheel extension in the axial direction (used for the collision)
+  wheels_interax: 0.28
+
+  wheel_joint_damping: 0.0
+  wheel_joint_static_friction: 0.0
+  wheel_joint_effort_lim: 30.0
+  wheel_joint_velocity_lim: 100.0
+
+  wheel_mu1_gazebo: 0.5 # static friction coefficient in the first direction
+  wheel_mu2_gazebo: 0.5 # static friction coefficient in the second direction
+  wheel_kp_gazebo: 1000000.0 # wheel collision contact stiffness
+  wheel_kd_gazebo: 0.0 # wheel collision contact damping
+  wheel_max_contacts_gazebo: 10 # wheel maximum number of contacts
+  body_mu1_gazebo: 0.3
+  body_mu2_gazebo: 0.3
+  body_kp_gazebo: 1000000.0
+  body_kd_gazebo: 0.0
+ 
+  box_lx: 0.16 # body box x-extension (visual)
+  box_ly: 0.21 # body box y-extension (visual)
+  box_lz: 0.16 # body box z-extension (visual)
+  
+  leg_length: 0.27 # collision leg length
+  leg_extrusion_l_edge: 0.02 # extrusion collision edge length 
+  leg_extrusion_l_z: 0.25 # extrusion collision vertical extension 
+  leg_pos_wrt_box_back: 0.076 # leg collision position offset wrt the body frame
+ 
+  fan_edge_length: 0.120 # fan collision edge length
+  fan_vert_footprint: 0.0366 # fan collision vertical extension
+  
+  door_handle_tot_height: 0.037 # door handle collision parameter
+  door_handle_height2: 0.015
+  door_handle_tot_lenght: 0.105
+  door_handle_lenght2: 0.075
+  door_handle_width: 0.02
+ 
+  motor_case_l_edge: 0.056 # motor case collision parameter
+  motor_case_extension: 0.075
+
+ 

@@ -1,0 +1,44 @@
+# 
+# Wavefront material file
+# Created with Kaydara FBX
+# 
+
+newmtl full_no_knee_no_wheelsMaterial0
+Ka 0.820000 0.820000 0.820000
+Kd 0.820000 0.820000 0.820000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 20.000000
+Tr 1.000000
+
+newmtl full_no_knee_no_wheelsMaterial1
+Ka 0.000000 0.250000 0.750000
+Kd 0.000000 0.250000 0.750000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 20.000000
+Tr 1.000000
+
+newmtl full_no_knee_no_wheelsMaterial2
+Ka 0.200000 0.200000 0.200000
+Kd 0.200000 0.200000 0.200000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 20.000000
+Tr 1.000000
+
+newmtl full_no_knee_no_wheelsMaterial3
+Ka 0.188235 0.188235 0.188235
+Kd 0.188235 0.188235 0.188235
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 20.000000
+Tr 1.000000
+
+newmtl full_no_knee_no_wheelsMaterial4
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 20.000000
+Tr 1.000000

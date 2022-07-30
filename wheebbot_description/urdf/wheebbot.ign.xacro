@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- joint state publisher (this way ignition gazebo publishes joint states to RViz) -->
+  <gazebo>
+    <plugin filename="libignition-gazebo-joint-state-publisher-system.so" name="ignition::gazebo::systems::JointStatePublisher"/>
+  </gazebo>
+
+  <!-- body -->
+  <gazebo reference="body">
+    <mu1>${body_mu1_gazebo}</mu1>
+    <mu2>${body_mu2_gazebo}</mu2>
+    <kp>${body_kp_gazebo}</kp>
+    <kd>${body_kd_gazebo}</kd>
+  </gazebo>
+
+  <!-- right wheel -->
+  <gazebo reference="right_wheel">
+    <mu1>${wheel_mu1_gazebo}</mu1>
+    <mu2>${wheel_mu2_gazebo}</mu2>
+    <kp>${wheel_kp_gazebo}</kp>
+    <kd>${wheel_kd_gazebo}</kd>
+    <maxContacts>${wheel_max_contacts_gazebo}</maxContacts>
+  </gazebo>
+
+  <!-- left wheel -->
+  <gazebo reference="left_wheel">
+    <mu1>${wheel_mu1_gazebo}</mu1>
+    <mu2>${wheel_mu2_gazebo}</mu2>
+    <kp>${wheel_kp_gazebo}</kp>
+    <kd>${wheel_kd_gazebo}</kd>
+    <maxContacts>${wheel_max_contacts_gazebo}</maxContacts>
+  </gazebo>
+
+
+
+</robot>

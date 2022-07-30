@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Reading some parameters from a YAML config file -->
+
+  <xacro:property name="yaml_file" value="$(find wheebbot)/config/urdf_params.yaml" />
+  <xacro:property name="props" value="${load_yaml(yaml_file)}"/>
+
+  <!-- Assigning those parameters to xacro properties -->
+
+  <xacro:property name="pendulum_mass" value="${props['wheebbot']['pendulum_mass']}" />
+  <xacro:property name="pendulum_length" value="${props['wheebbot']['pendulum_length']}" />
+  <xacro:property name="pendulum_width" value="${props['wheebbot']['pendulum_width']}" />
+  <xacro:property name="pendulum_depth" value="${props['wheebbot']['pendulum_depth']}" />
+  <xacro:property name="pendulum_CoM_pitch_offset" value="${props['wheebbot']['pendulum_CoM_pitch_offset']}" />
+  
+  <xacro:property name="wheel_mass" value="${props['wheebbot']['wheel_mass']}" />
+  <xacro:property name="wheel_radius" value="${props['wheebbot']['wheel_radius']}" />
+  <xacro:property name="wheel_thickness" value="${props['wheebbot']['wheel_thickness']}" />
+  <xacro:property name="wheels_interax" value="${props['wheebbot']['wheels_interax']}" />
+  <xacro:property name="wheel_joint_damping" value="${props['wheebbot']['wheel_joint_damping']}" />
+  <xacro:property name="wheel_joint_static_friction" value="${props['wheebbot']['wheel_joint_static_friction']}" />
+  <xacro:property name="wheel_joint_effort_lim" value="${props['wheebbot']['wheel_joint_effort_lim']}" />
+  <xacro:property name="wheel_joint_velocity_lim" value="${props['wheebbot']['wheel_joint_velocity_lim']}" />
+
+  <xacro:property name="wheel_mu1_gazebo" value="${props['wheebbot']['wheel_mu1_gazebo']}" />
+  <xacro:property name="wheel_mu2_gazebo" value="${props['wheebbot']['wheel_mu2_gazebo']}" />
+  <xacro:property name="wheel_kp_gazebo" value="${props['wheebbot']['wheel_kp_gazebo']}" />
+  <xacro:property name="wheel_kd_gazebo" value="${props['wheebbot']['wheel_kd_gazebo']}" />
+  <xacro:property name="wheel_max_contacts_gazebo" value="${props['wheebbot']['wheel_max_contacts_gazebo']}" />
+  <xacro:property name="body_mu1_gazebo" value="${props['wheebbot']['body_mu1_gazebo']}" />
+  <xacro:property name="body_mu2_gazebo" value="${props['wheebbot']['body_mu2_gazebo']}" />
+  <xacro:property name="body_kp_gazebo" value="${props['wheebbot']['body_kp_gazebo']}" />
+  <xacro:property name="body_kd_gazebo" value="${props['wheebbot']['body_kd_gazebo']}" />
+
+  <xacro:property name="box_lx" value="${props['wheebbot']['box_lx']}" />
+  <xacro:property name="box_ly" value="${props['wheebbot']['box_ly']}" />
+  <xacro:property name="box_lz" value="${props['wheebbot']['box_lz']}" />
+
+  <xacro:property name="leg_length" value="${props['wheebbot']['leg_length']}" />
+  <xacro:property name="leg_extrusion_l_edge" value="${props['wheebbot']['leg_extrusion_l_edge']}" />
+  <xacro:property name="leg_extrusion_l_z" value="${props['wheebbot']['leg_extrusion_l_z']}" />
+  <xacro:property name="leg_pos_wrt_box_back" value="${props['wheebbot']['leg_pos_wrt_box_back']}" />
+
+  <xacro:property name="fan_edge_length" value="${props['wheebbot']['fan_edge_length']}" />
+  <xacro:property name="fan_vert_footprint" value="${props['wheebbot']['fan_vert_footprint']}" />
+
+  <xacro:property name="motor_case_l_edge" value="${props['wheebbot']['motor_case_l_edge']}" />
+  <xacro:property name="motor_case_extension" value="${props['wheebbot']['motor_case_extension']}" />
+
+  <xacro:property name="door_handle_tot_height" value="${props['wheebbot']['door_handle_tot_height']}" />
+  <xacro:property name="door_handle_height2" value="${props['wheebbot']['door_handle_height2']}" />
+  <xacro:property name="door_handle_tot_lenght" value="${props['wheebbot']['door_handle_tot_lenght']}" />
+  <xacro:property name="door_handle_lenght2" value="${props['wheebbot']['door_handle_lenght2']}" />
+  <xacro:property name="door_handle_width" value="${props['wheebbot']['door_handle_width']}" />
+
+</robot>
