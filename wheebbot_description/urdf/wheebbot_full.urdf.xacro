@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot name="wheebbot_full" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:arg name="is_gazebo_classic" default="true" />
+    <xacro:arg name="is_floating_base" default="false" />
+
+    <xacro:include filename="$(find wheebbot_description)/urdf/wheebbot.urdf.xacro" />
+
+    <xacro:if value="$(arg is_floating_base)">
+
+        <link name="world">
+        </link>
+    
+        <joint name="world2wheebbot" type="floating">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <parent link="world"/>
+            <child link="aux_link"/>
+        </joint>
+
+    </xacro:if>
+    
+    <xacro:unless value="$(arg is_floating_base)">
+
+    </xacro:unless>
+
+    <!-- Generating wheebbot description based on the arguments -->
+    <xacro:ign_or_gazebo is_gazebo_classic="$(arg is_gazebo_classic)"/> 
+
+</robot>

@@ -1,0 +1,47 @@
+jobs:
+  include:
+    - os: linux
+      dist: focal
+
+      language: python
+
+      before_script:
+
+      - rm -rf /opt/pyenv  # damn pyenv
+
+      # apt update and core packages installation
+      - sudo apt-get update
+      - sudo apt-get install git libgtest-dev cmake doxygen curl libeigen3-dev pybind11-dev libboost-all-dev libhdf5-dev lsb-release
+
+      script: 
+
+    - os: linux
+      dist: focal
+      
+      language: cpp
+      compiler: g++
+
+      before_script:
+      
+      - rm -rf /opt/pyenv  # damn pyenv
+
+      # apt update and core packages installation
+      - sudo apt-get update
+      - sudo apt-get install git libgtest-dev cmake doxygen curl libeigen3-dev pybind11-dev libboost-all-dev libhdf5-dev lsb-release
+
+      script: 
+      - set +e
+      - mkdir build
+      - cd build
+      - cmake -DBUILD_TESTS=ON ..
+      - make
+      - ctest --output-on-failure
+
+notifications:
+  email:
+    recipients:
+      - andreapatrizi1b6e6@gmail.com
+    on_success: never
+    on_failure: always
+
+

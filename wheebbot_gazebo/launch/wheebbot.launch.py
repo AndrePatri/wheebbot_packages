@@ -32,7 +32,7 @@ from os import environ
 def generate_launch_description():
 
     wheebbot_description_path = get_package_share_path('wheebbot_description')
-    default_model_path = wheebbot_description_path/'urdf/wheebbot.urdf.xacro'
+    default_model_path = wheebbot_description_path/'urdf/wheebbot_full.urdf.xacro'
     default_rviz_config_path = wheebbot_description_path/'config/rviz/wheebbot.rviz'
 
     ## launch arguments
@@ -55,28 +55,68 @@ def generate_launch_description():
             'is_gazebo_classic',
             default_value='true',
             description='Whether to use Gazebo Classic as a simulator or (Ignition) Gazebo')
+    
+    is_floating_base_gz_arg=DeclareLaunchArgument(
+            'is_floating_base_gz',
+            default_value='false',
+            description='Whether to add a floating joint between world and the robot')
+
+    is_floating_base_rviz_arg=DeclareLaunchArgument(
+            'is_floating_base_rviz',
+            default_value='true',
+            description='Whether to add a floating joint between world and the robot')
 
     use_sim_time_arg=DeclareLaunchArgument(
             'use_sim_time',
             default_value='false',
             description='Use simulation (Gazebo) clock if true')
 
+    rviz_description_topic_arg=DeclareLaunchArgument(
+            'rviz_description_topic',
+            default_value='robot_description_rviz',
+            description='')
+    
+    gz_description_topic_arg=DeclareLaunchArgument(
+            'gz_description_topic',
+            default_value='robot_description_gz',
+            description='')
+
     rviz_arg = DeclareLaunchArgument(name = 'rvizconfig', default_value = str(default_rviz_config_path),
                                      description = 'Absolute path to rviz config file')
 
 
-    robot_description = ParameterValue(Command(['xacro ', LaunchConfiguration('model'),\
-                                                ' is_gazebo_classic:=', LaunchConfiguration('is_gazebo_classic')]),
+    robot_description_gz = ParameterValue(Command(['xacro ', LaunchConfiguration('model'),\
+                                                ' is_gazebo_classic:=', LaunchConfiguration('is_gazebo_classic'), \
+                                                ' is_floating_base:=', LaunchConfiguration('is_floating_base_gz')]),
+                                       value_type=str)
+                                       
+    robot_description_rviz = ParameterValue(Command(['xacro ', LaunchConfiguration('model'),\
+                                                ' is_gazebo_classic:=', LaunchConfiguration('is_gazebo_classic'), \
+                                                ' is_floating_base:=', LaunchConfiguration('is_floating_base_rviz')]),
                                        value_type=str)
 
     ## nodes
-
-    robot_state_publisher_node = Node(
-        package='robot_state_publisher',
+    
+    # robot state publisher for rviz
+    robot_state_publisher_rviz_node = Node(
+        package='my_robot_state_publisher',
         executable='robot_state_publisher',
-        name='robot_state_publisher',
+        name='robot_state_publisher_rviz',
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time', default='true'),\
-                    'robot_description': robot_description}]
+                    'robot_description': robot_description_rviz,\
+                    'description_topic_name': LaunchConfiguration('rviz_description_topic',\
+                                                                    default='robot_description')}]
+    )
+
+    # robot state publisher for gz (only used to publish to robot_description)
+    robot_state_publisher_gz_node = Node(
+        package='my_robot_state_publisher',
+        executable='robot_state_publisher',
+        name='robot_state_publisher_gz',
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time', default='true'),\
+                    'robot_description': robot_description_gz, \
+                    'description_topic_name': LaunchConfiguration('gz_description_topic',\
+                                                                    default='robot_description')}]
     )
 
     rviz_node = Node(
@@ -109,7 +149,7 @@ def generate_launch_description():
         )   
 
     spawn_entity_node_gz = Node(package='gazebo_ros', executable='spawn_entity.py',
-                    arguments=['-entity', 'wheebbot', '-topic', 'robot_description'],
+                    arguments=['-entity', 'wheebbot', '-topic', 'robot_description_gz'],
                     output='screen', 
                     condition= IfCondition(LaunchConfiguration('is_gazebo_classic')))
                             
@@ -133,7 +173,7 @@ def generate_launch_description():
     spawn_entity_node_ign = Node(package = 'ros_ign_gazebo', executable = 'create',
         arguments=[
             '-name', 'wheebbot',
-            '-topic', 'robot_description',
+            '-topic', 'robot_description_gz',
             ],
         output='screen',
         condition= UnlessCondition(LaunchConfiguration('is_gazebo_classic')),
@@ -157,13 +197,18 @@ def generate_launch_description():
 
     # returning arguments and nodes
     return LaunchDescription([
-        is_gazebo_classic_arg,
-        use_sim_time_arg,
-        model_arg,
         is_gzserver_verbose_arg,
         is_gzclient_verbose_arg,
-        verbosity_arg,
         world_arg,
+        verbosity_arg,
+        is_gazebo_classic_arg,
+        is_floating_base_gz_arg,
+        is_floating_base_rviz_arg,
+        rviz_description_topic_arg,
+        gz_description_topic_arg,
+        use_sim_time_arg,
+        model_arg,
+        physics_type_arg,
         is_paused_arg,
         physics_type_arg,
         rviz_arg,
@@ -171,7 +216,8 @@ def generate_launch_description():
         gzserver_node,
         ign_gazebo_node,
         ros_ign_bridge_node, 
-        robot_state_publisher_node,
+        robot_state_publisher_rviz_node,
+        robot_state_publisher_gz_node,
         spawn_entity_node_gz,
         spawn_entity_node_ign,
         rviz_node,

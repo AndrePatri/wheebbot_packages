@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <!-- ########### MODEL PLUGINS ############ -->
-
-  <!-- Model control plugin/s -->
-  <!-- <plugin name="libcontrol_plugin" filename="package://wheebbot/plugins/gazebo_classic/wheebbot_test/libcontrol_plugin.so"/> -->
+  <xacro:property name="yaml_file" value="$(find wheebbot_description)/config/urdf_params.yaml" />
+  <xacro:property name="props" value="${load_yaml(yaml_file)}"/>
+  
+  <xacro:property name="wheels_interax" value="${props['wheebbot']['wheels_interax']}" />
+  <xacro:property name="wheels_diameter" value="${2* props['wheebbot']['wheel_radius']}" />
 
   <!-- joint state publisher (this way gazebo publishes joint states to RViz) -->
   <gazebo>
@@ -23,6 +24,75 @@
     <mu2 value="${body_mu2_gazebo}" />
     <kp value="${body_kp_gazebo}" />
     <kd value="${body_kd_gazebo}" />
+
+    <!-- <sensor name="imu_sensor" type="imu">
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+         <ros>
+           <namespace></namespace>
+           <remapping>~/out:=imu</remapping>
+         </ros>
+         <initial_orientation_as_reference>false</initial_orientation_as_reference>
+       </plugin>
+       <always_on>true</always_on>
+       <update_rate>100</update_rate>
+       <visualize>true</visualize>
+       <imu>
+         <angular_velocity>
+           <x>
+             <noise type="gaussian">
+               <mean>0.0</mean>
+               <stddev>0.0</stddev>
+               <bias_mean>0.0</bias_mean>
+               <bias_stddev>0.0</bias_stddev>
+             </noise>
+           </x>
+           <y>
+             <noise type="gaussian">
+               <mean>0.0</mean>
+               <stddev>0.0</stddev>
+               <bias_mean>0.0</bias_mean>
+               <bias_stddev>0.0</bias_stddev>
+             </noise>
+           </y>
+           <z>
+             <noise type="gaussian">
+               <mean>0.0</mean>
+               <stddev>0.0</stddev>
+               <bias_mean>0.0</bias_mean>
+               <bias_stddev>0.0</bias_stddev>
+             </noise>
+           </z>
+         </angular_velocity>
+         <linear_acceleration>
+           <x>
+             <noise type="gaussian">
+               <mean>0.0</mean>
+               <stddev>0.0</stddev>
+               <bias_mean>0.0</bias_mean>
+               <bias_stddev>0.0</bias_stddev>
+             </noise>
+           </x>
+           <y>
+             <noise type="gaussian">
+               <mean>0.0</mean>
+               <stddev>0.0</stddev>
+               <bias_mean>0.0</bias_mean>
+               <bias_stddev>0.0</bias_stddev>
+             </noise>
+           </y>
+           <z>
+             <noise type="gaussian">
+               <mean>0.0</mean>
+               <stddev>0.0</stddev>
+               <bias_mean>0.0</bias_mean>
+               <bias_stddev>0.0</bias_stddev>
+             </noise>
+           </z>
+         </linear_acceleration>
+       </imu>
+     </sensor>
+      -->
+
   </gazebo>
 
   <!-- right wheel -->
@@ -42,5 +112,35 @@
     <kd value="${wheel_kd_gazebo}" />
     <maxContacts value="${wheel_max_contacts_gazebo}" />
   </gazebo>
+
+  <!-- diff drive plugin -->
+
+  <!-- <gazebo>
+    <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
+      <ros>
+        <namespace>/base_state</namespace>
+      </ros>
+  
+      <!-- wheels -->
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+  
+      <!-- kinematics -->
+      <wheel_separation> 0.028</wheel_separation> 
+      <wheel_diameter> 0.12 </wheel_diameter> 
+  
+      <!-- limits -->
+      <max_wheel_torque>2</max_wheel_torque>
+      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+  
+      <!-- output -->
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+  
+      <odometry_frame>world</odometry_frame>
+      <robot_base_frame>aux_link</robot_base_frame>
+    </plugin>
+  </gazebo> -->
 
 </robot>
