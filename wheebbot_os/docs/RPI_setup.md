@@ -4,28 +4,25 @@ Steps to setup RPI:
 
 - Install an Ubuntu Server version using the rpi_imager tool (setup wifi in settings)
 
-- Update and upgrade packages
+On the host pc (crosscompiling kernel):
 
-- generate ssh key and add it to github account
+	- Go to [https://wiki.linuxfoundation.org/realtime/start](https://wiki.linuxfoundation.org/realtime/start), click on "Latest Stable Version" and look for the name of the most recent stable kernel
 
-- Install pip with 'sudo apt install python3 python3-pip'
+	- Run `git clone git@github.com:AndPatr/rpi_preempt_rt.git` 
 
-- Install can utilities with 
-	```
-	apt get install can-utils 
-	
-	pip3 install python-can
-	
-	pip install cantools
-	
-	```
-								
+	- Edit `setup_rpi.bash` with the name of the kernel you want to crosscompile 
 
-- Install ODrive python package (optional) with `sudo pip3 install --upgrade odrive`
+	- Run `./crosscompile.bash`
 
-- Install ROS (Humble) &rarr; @ [https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
+	- Push the newly compiled .deb packages to github 
 
-- Crosscompile/Install fully preemptible kernel &rarr; `git clone git@github.com:AndPatr/rpi_preempt_rt.git`
+On the PI:
+
+	- Generate an ssh key for the Pi with `ssh-keygen -t ed25519 -C "your_email@example.com"` and add it to your Github account
+
+	- Run `git clone git@github.com:AndPatr/rpi_preempt_rt.git` 
+									
+	- Go inside rpi_preempt_rt and run `./setup_rpi.bash` &rarr; the RPI will reboot to load the new rt kernel
 
 ---
  
