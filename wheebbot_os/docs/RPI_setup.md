@@ -10,17 +10,18 @@ Steps to setup RPI:
 
 - Install pip with 'sudo apt install python3 python3-pip'
 
-- Install can utilities with 'apt get install can-utils 
+- Install can utilities with ```apt get install can-utils 
 
-pip3 install python-can
-
-pip install cantools' 
+								pip3 install python-can
+								
+								pip install cantools```
+								
 
 - Install ODrive python package (optional) with 'sudo pip3 install --upgrade odrive'
 
-- Install ROS (Humble) &rarr @ [https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
+- Install ROS (Humble) &rarr; @ [https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 
-- Crosscompile/Install fully preemptible kernel &rarr 'git clone git@github.com:AndPatr/rpi_preempt_rt.git'
+- Crosscompile/Install fully preemptible kernel &rarr; 'git clone git@github.com:AndPatr/rpi_preempt_rt.git'
 
 ---
  
