@@ -21,11 +21,11 @@ Steps to setup RPI:
 	```
 								
 
-- Install ODrive python package (optional) with 'sudo pip3 install --upgrade odrive'
+- Install ODrive python package (optional) with `sudo pip3 install --upgrade odrive`
 
 - Install ROS (Humble) &rarr; @ [https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)
 
-- Crosscompile/Install fully preemptible kernel &rarr; 'git clone git@github.com:AndPatr/rpi_preempt_rt.git'
+- Crosscompile/Install fully preemptible kernel &rarr; `git clone git@github.com:AndPatr/rpi_preempt_rt.git`
 
 ---
  
