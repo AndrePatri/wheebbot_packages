@@ -11,11 +11,14 @@ Steps to setup RPI:
 - Install pip with 'sudo apt install python3 python3-pip'
 
 - Install can utilities with 
-	```apt get install can-utils 
+	```
+	apt get install can-utils 
 	
 	pip3 install python-can
 	
-	pip install cantools```
+	pip install cantools
+	
+	```
 								
 
 - Install ODrive python package (optional) with 'sudo pip3 install --upgrade odrive'
