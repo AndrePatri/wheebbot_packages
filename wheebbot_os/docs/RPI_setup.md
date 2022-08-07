@@ -63,7 +63,7 @@ To make a device with ubuntu 20.04 a wifi access point (useful to run ROS on mul
 
 ### CAN bus
 
-To check is can0 and can1 are initialized run `dmesg | grep spi`
+To check if can0 and can1 are initialized run `dmesg | grep spi`
 
 To initialize can0 (can1 the same way) and set the bitrate run `sudo ip link set can0 up type can bitrate 1000000`
 
