@@ -76,9 +76,12 @@ To check possible message conflict on the CAN buses
 `canbusload -rbt can0@1000000 can1@1000000`
 
 To automatically bring up can0 and can1 at startup:
-```sudo touch /etc/systemd/network/80-can.network
+```
+sudo touch /etc/systemd/network/80-can.network
 
-sudo nano /etc/systemd/network/80-can.network```
+sudo nano /etc/systemd/network/80-can.network
+
+```
 
 with the following content:
 
@@ -96,6 +99,7 @@ Then, run
 `sudo systemctl enable systemd-networkd`
 
 to start systemd-networkd at boot time
+
 ### Setting up the RTC (made available by the Seedstudio CAN-SPI hat) on RPI:
 
 - Simply add `dtoverlay=i2c-rtc,rtc_name` to `/boot/firmware/usercfg.txt`
