@@ -40,7 +40,7 @@ endif()
 # ament_python_install_package(${PROJECT_NAME})
 
 # Installing directories
-install(DIRECTORY launch config src include DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
+# install(DIRECTORY launch config src include DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
 
 # Include directories:
 include_directories(include)
