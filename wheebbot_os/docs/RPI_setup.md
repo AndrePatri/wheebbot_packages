@@ -1,8 +1,6 @@
 # RPI setup notes
 
-Steps to setup RPI:
-
-- Install an Ubuntu Server version using the rpi_imager tool (setup wifi in settings)
+First, install an Ubuntu Server version using the rpi_imager tool (setup wifi in settings).
 
 On the host pc (crosscompiling kernel):
 
