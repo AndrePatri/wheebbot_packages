@@ -22,7 +22,7 @@ To SSH to the RPI:
 
 - Power it up and wait. After 2-4 minutes max the RPI should be connected to network. On the host pc use the command `sudo nmap -sP xxx.xxx.x.x/xx` (for instance `sudo nmap -sP 192.168.1.0/24`) to retrieve RPI's IP address (the RPI should appear with a name like "Raspberry Pi Trading")
 
-- With the IP address you found execute `ssh ubuntu@xxx.xxx.x.xx` where xxx.xxx.x.xx is the current IP address of RPI. Finally insert the ssh password for the RPI user (e.g. "sudowudo")
+- With the IP address you found execute `ssh ubuntu@xxx.xxx.x.xx` where xxx.xxx.x.xx is the current IP address of RPI. Finally insert the ssh password for the RPI user (e.g. "sudowudo"). username: "ap_rpi"
 
 - Should you get 'remote host identification has changed!' run `ssh-keygen -R xxx.xxx.x.xx`
  
