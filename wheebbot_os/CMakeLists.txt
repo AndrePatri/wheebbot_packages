@@ -16,13 +16,4 @@ find_package(rclcpp REQUIRED)
 find_package(ament_cmake_python REQUIRED)
 find_package(rclpy REQUIRED)
 
-# Include directories:
-include_directories(include)
-
-# Installing targets:
-install(PROGRAMS
-  kernels/install_kernel.bash
-  DESTINATION lib/${PROJECT_NAME}
-)
-
 ament_package()

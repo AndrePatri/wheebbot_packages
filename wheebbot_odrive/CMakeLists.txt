@@ -29,10 +29,10 @@ if(BUILD_TESTING)
 endif()
 
 # Installing directories
-install(DIRECTORY launch config src include DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
+install(DIRECTORY launch config src DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
 
 # Include directories:
-include_directories(include)
+#include_directories(include)
 
 # Installing targets:
 install(PROGRAMS

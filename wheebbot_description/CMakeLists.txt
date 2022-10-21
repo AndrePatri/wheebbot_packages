@@ -42,7 +42,7 @@ endif()
 # ament_python_install_package(${PROJECT_NAME})
 
 # Installing directories
-install(DIRECTORY config meshes sdf urdf srdf launch DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
+install(DIRECTORY config meshes sdf urdf launch DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
 
 # Include directories:
 # include_directories(include)
