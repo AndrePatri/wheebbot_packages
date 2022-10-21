@@ -17,7 +17,4 @@ find_package(rclpy REQUIRED)
 # Installing directories
 install(DIRECTORY config DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
 
-# Include directories:
-include_directories(include)
-
 ament_package()

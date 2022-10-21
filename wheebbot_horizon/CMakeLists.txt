@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(wheebbot_state_estimation)
+project(wheebbot_horizon)
 
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
@@ -19,15 +19,15 @@ find_package(rclpy REQUIRED)
 
 find_package(std_msgs REQUIRED)
 
+find_package(ignition-gazebo6 REQUIRED)
+find_package(xacro REQUIRED)
+
 # Installing directories
 install(DIRECTORY config DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
 
 install(PROGRAMS
-  src/generate_wheebbot_odrive_can_dbc.py src/generate_wheebbot_imu_can_dbc.py
+  src/test_balancing_mpc.py
   DESTINATION lib/${PROJECT_NAME}
 )
-
-# Include directories:
-include_directories(include)
 
 ament_package()

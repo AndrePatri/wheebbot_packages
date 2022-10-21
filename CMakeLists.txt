@@ -13,4 +13,5 @@ add_subdirectory(wheebbot_description)
 add_subdirectory(wheebbot_cntrl)
 #add_subdirectory(wheebbot_cads)
 #add_subdirectory(wheebbot_arduino)
+add_subdirectory(wheebbot_horizon)
 

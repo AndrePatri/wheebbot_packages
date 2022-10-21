@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+
+<package format="3"> <!-- ROS2 uses format 3-->
+
+  <!-- required tags -->
+  <name>wheebbot_horizon</name>
+  <version>0.0.1</version>
+  <description>horizon code for WheeBBot</description>
+  <maintainer email="andrepatrizi1b6e6@gmail.com">andreap</maintainer>
+  <license>BSD</license>
+  <!-- optional -->
+  <url type="repository"> https://github.com/AndPatr/WheeBBot-v1 </url>   
+  <author email="andrepatrizi1b6e6@gmail.com"> Andrea Patrizi </author>
+  
+  <buildtool_depend>ament_cmake_python</buildtool_depend> <!-- python code; cmake_python allows the use of CMakerLists also for python. 
+  
+
+</package>
