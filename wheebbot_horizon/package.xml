@@ -13,7 +13,10 @@
   <url type="repository"> https://github.com/AndPatr/WheeBBot-v1 </url>   
   <author email="andrepatrizi1b6e6@gmail.com"> Andrea Patrizi </author>
   
-  <buildtool_depend>ament_cmake_python</buildtool_depend> <!-- python code; cmake_python allows the use of CMakerLists also for python. 
-  
+  <buildtool_depend>ament_cmake_python</buildtool_depend> 
 
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+  
 </package>

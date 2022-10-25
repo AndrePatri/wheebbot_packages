@@ -1,0 +1,54 @@
+# YAML config file associated with test_balancing_mpc.py script.
+
+i_q_estimation:
+
+  tanh_coeff: 20
+
+resampling:
+  dt: 0.004
+
+problem:
+
+  n_int: 100
+
+  takeoff_node: 85
+
+  dt_lb: 0.0001
+  dt_ub: 0.1
+
+  jnt_limit_margin: 0.04
+  jnt_vel_limit_margin: 0.05
+
+  is_iq_cnstrnt: true
+  is_friction_cone: false
+
+  friction_cnstrnt: 
+    mu_friction_cone: 0.4
+
+  weights: 
+
+    scale_factor_costs_base: 100000 
+    
+    weight_f_contact: 0.0001 
+    weight_f_contact_diff: 0.0001
+    weight_q_p_dot: -1
+    weight_q_p_ddot: 0.0000001
+    weight_q_p_ddot_diff: -1
+
+    weight_com_term_vel: 300
+    weight_com_vel: -1
+    weight_tip_under_hip: -1
+
+    weight_sat_i_q: -1
+
+solver:
+  ipopt_tol: 0.000001
+  ipopt_maxiter: 1000
+  ipopt_cnstr_viol_tol: 0.0000001
+  ipopt_lin_solver: "mumps" 
+  name: "ipopt"
+
+transcription:
+  name: "multiple_shooting"
+  integrator_name: "RK4"
+

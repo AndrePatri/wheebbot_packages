@@ -114,26 +114,22 @@
   </gazebo>
 
   <!-- diff drive plugin -->
-
-  <!-- <gazebo>
+<!-- 
+  <gazebo>
     <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
       <ros>
         <namespace>/base_state</namespace>
       </ros>
   
-      <!-- wheels -->
       <left_joint>left_wheel_joint</left_joint>
       <right_joint>right_wheel_joint</right_joint>
   
-      <!-- kinematics -->
       <wheel_separation> 0.028</wheel_separation> 
       <wheel_diameter> 0.12 </wheel_diameter> 
   
-      <!-- limits -->
       <max_wheel_torque>2</max_wheel_torque>
       <max_wheel_acceleration>1.0</max_wheel_acceleration>
   
-      <!-- output -->
       <publish_odom>true</publish_odom>
       <publish_odom_tf>false</publish_odom_tf>
       <publish_wheel_tf>true</publish_wheel_tf>

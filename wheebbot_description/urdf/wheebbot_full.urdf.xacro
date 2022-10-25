@@ -11,17 +11,13 @@
         <link name="world">
         </link>
     
-        <joint name="world2wheebbot" type="floating">
+        <joint name="world_jnt" type="floating">
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <parent link="world"/>
             <child link="aux_link"/>
         </joint>
 
     </xacro:if>
-    
-    <xacro:unless value="$(arg is_floating_base)">
-
-    </xacro:unless>
 
     <!-- Generating wheebbot description based on the arguments -->
     <xacro:ign_or_gazebo is_gazebo_classic="$(arg is_gazebo_classic)"/> 

@@ -17,17 +17,9 @@ find_package(rclcpp REQUIRED)
 find_package(ament_cmake_python REQUIRED)
 find_package(rclpy REQUIRED)
 
-find_package(std_msgs REQUIRED)
+find_package(ament_cmake_auto REQUIRED)
 
-find_package(ignition-gazebo6 REQUIRED)
-find_package(xacro REQUIRED)
+ament_python_install_package(${PROJECT_NAME})
 
-# Installing directories
-install(DIRECTORY config DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
+ament_auto_package(INSTALL_TO_SHARE config)
 
-install(PROGRAMS
-  src/test_balancing_mpc.py
-  DESTINATION lib/${PROJECT_NAME}
-)
-
-ament_package()

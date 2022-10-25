@@ -17,13 +17,13 @@ find_package(rclcpp REQUIRED)
 find_package(ament_cmake_python REQUIRED)
 find_package(rclpy REQUIRED)
 
+find_package(ament_cmake_auto REQUIRED)
+
 # Installing directories
-install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME}) # installing diretories so that ros2 can see them
+ament_auto_package(INSTALL_TO_SHARE launch config)
 
 # Installing targets:
 install(PROGRAMS
   src/odrv_axes_USBconfigurator.py
   DESTINATION lib/${PROJECT_NAME}
 )
-
-ament_package()
