@@ -54,4 +54,6 @@
   <xacro:property name="door_handle_lenght2" value="${props['wheebbot']['door_handle_lenght2']}" />
   <xacro:property name="door_handle_width" value="${props['wheebbot']['door_handle_width']}" />
 
+   <xacro:property name="big_joint_limit" value="${1e25}" />
+
 </robot>

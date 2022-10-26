@@ -363,6 +363,10 @@ class balancingMpc:
         if 'world_jnt' in self.joint_names: self.joint_names.remove('universe')
         # if 'floating_base_joint' in self.joint_names: self.joint_names.remove('floating_base_joint')
 
+        print(self.joint_names)
+        print("nq: " + str(self.n_q))
+        print("nv: " + str(self.n_v))
+
         self.I_lim = self.act_yaml_file["I_peak"] # i_q current limits
 
         jnt_lim_margin_array = np.tile(self.jnt_limit_margin, (self.n_q))

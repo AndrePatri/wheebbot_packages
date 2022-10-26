@@ -2,7 +2,7 @@
 <robot name="wheebbot_full" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:arg name="is_gazebo_classic" default="true" />
-    <xacro:arg name="is_floating_base" default="false" />
+    <xacro:arg name="is_floating_base" default="true" />
 
     <xacro:include filename="$(find wheebbot_description)/urdf/wheebbot.urdf.xacro" />
 
