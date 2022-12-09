@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:property name="yaml_file" value="$(find wheebbot_description)/config/urdf_params.yaml" />
-  <xacro:property name="props" value="${load_yaml(yaml_file)}"/>
+  <xacro:property name="props" value="${xacro.load_yaml(yaml_file)}"/>
   
   <xacro:property name="wheels_interax" value="${props['wheebbot']['wheels_interax']}" />
   <xacro:property name="wheels_diameter" value="${2* props['wheebbot']['wheel_radius']}" />

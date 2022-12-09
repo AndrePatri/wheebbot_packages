@@ -32,8 +32,8 @@ from ament_index_python.packages import get_package_share_path
 
 def generate_launch_description():
 
-    package_share_path = get_package_share_path('wheebbot')
-    default_model_path = package_share_path/'description/urdf/wheebbot_ign.urdf.xacro'
+    package_share_path = get_package_share_path('wheebbot_description')
+    default_model_path = package_share_path/'/urdf/wheebbot_ign.urdf.xacro'
     robot_description = ParameterValue(Command(['xacro ', LaunchConfiguration('model')]),
                                        value_type=str)
 

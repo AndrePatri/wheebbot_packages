@@ -4,141 +4,37 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="wheebbot_full">
-  <link name="world">
-        </link>
-  <joint name="world_jnt" type="floating">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="world"/>
-    <child link="aux_link"/>
-  </joint>
   <!-- Reading some parameters from a YAML config file -->
   <!-- Assigning those parameters to xacro properties -->
   <!-- Including the materials file -->
   <!-- <xacro:include filename="$(find wheebbot_description)/urdf/materials.urdf.xacro" /> -->
-  <!-- joint state publisher (this way gazebo publishes joint states to RViz) -->
+  <!-- joint state publisher (this way ignition gazebo publishes joint states to RViz) -->
   <gazebo>
-    <plugin filename="libgazebo_ros_joint_state_publisher.so" name="gazebo_ros_joint_state_publisher">
-      <update_rate>20</update_rate>
-      <joint_name>left_wheel_joint</joint_name>
-      <joint_name>right_wheel_joint</joint_name>
-    </plugin>
+    <plugin filename="libignition-gazebo-joint-state-publisher-system.so" name="ignition::gazebo::systems::JointStatePublisher"/>
   </gazebo>
-  <!-- ########### LINK TAGS ############ -->
   <!-- body -->
   <gazebo reference="body">
-    <mu1 value="0.3"/>
-    <mu2 value="0.3"/>
-    <kp value="1000000.0"/>
-    <kd value="0.0"/>
-    <!-- <sensor name="imu_sensor" type="imu">
-      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
-         <ros>
-           <namespace></namespace>
-           <remapping>~/out:=imu</remapping>
-         </ros>
-         <initial_orientation_as_reference>false</initial_orientation_as_reference>
-       </plugin>
-       <always_on>true</always_on>
-       <update_rate>100</update_rate>
-       <visualize>true</visualize>
-       <imu>
-         <angular_velocity>
-           <x>
-             <noise type="gaussian">
-               <mean>0.0</mean>
-               <stddev>0.0</stddev>
-               <bias_mean>0.0</bias_mean>
-               <bias_stddev>0.0</bias_stddev>
-             </noise>
-           </x>
-           <y>
-             <noise type="gaussian">
-               <mean>0.0</mean>
-               <stddev>0.0</stddev>
-               <bias_mean>0.0</bias_mean>
-               <bias_stddev>0.0</bias_stddev>
-             </noise>
-           </y>
-           <z>
-             <noise type="gaussian">
-               <mean>0.0</mean>
-               <stddev>0.0</stddev>
-               <bias_mean>0.0</bias_mean>
-               <bias_stddev>0.0</bias_stddev>
-             </noise>
-           </z>
-         </angular_velocity>
-         <linear_acceleration>
-           <x>
-             <noise type="gaussian">
-               <mean>0.0</mean>
-               <stddev>0.0</stddev>
-               <bias_mean>0.0</bias_mean>
-               <bias_stddev>0.0</bias_stddev>
-             </noise>
-           </x>
-           <y>
-             <noise type="gaussian">
-               <mean>0.0</mean>
-               <stddev>0.0</stddev>
-               <bias_mean>0.0</bias_mean>
-               <bias_stddev>0.0</bias_stddev>
-             </noise>
-           </y>
-           <z>
-             <noise type="gaussian">
-               <mean>0.0</mean>
-               <stddev>0.0</stddev>
-               <bias_mean>0.0</bias_mean>
-               <bias_stddev>0.0</bias_stddev>
-             </noise>
-           </z>
-         </linear_acceleration>
-       </imu>
-     </sensor>
-      -->
+    <mu1>0.3</mu1>
+    <mu2>0.3</mu2>
+    <kp>1000000.0</kp>
+    <kd>0.0</kd>
   </gazebo>
   <!-- right wheel -->
   <gazebo reference="right_wheel">
-    <mu1 value="0.5"/>
-    <mu2 value="0.5"/>
-    <kp value="1000000.0"/>
-    <kd value="0.0"/>
-    <maxContacts value="10"/>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>0.0</kd>
+    <maxContacts>10</maxContacts>
   </gazebo>
   <!-- left wheel -->
   <gazebo reference="left_wheel">
-    <mu1 value="0.5"/>
-    <mu2 value="0.5"/>
-    <kp value="1000000.0"/>
-    <kd value="0.0"/>
-    <maxContacts value="10"/>
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>1000000.0</kp>
+    <kd>0.0</kd>
+    <maxContacts>10</maxContacts>
   </gazebo>
-  <!-- diff drive plugin -->
-  <!-- 
-  <gazebo>
-    <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
-      <ros>
-        <namespace>/base_state</namespace>
-      </ros>
-  
-      <left_joint>left_wheel_joint</left_joint>
-      <right_joint>right_wheel_joint</right_joint>
-  
-      <wheel_separation> 0.028</wheel_separation> 
-      <wheel_diameter> 0.12 </wheel_diameter> 
-  
-      <max_wheel_torque>2</max_wheel_torque>
-      <max_wheel_acceleration>1.0</max_wheel_acceleration>
-  
-      <publish_odom>true</publish_odom>
-      <publish_odom_tf>false</publish_odom_tf>
-      <publish_wheel_tf>true</publish_wheel_tf>
-  
-      <odometry_frame>world</odometry_frame>
-      <robot_base_frame>aux_link</robot_base_frame>
-    </plugin>
-  </gazebo> -->
   <!-- auxiliary link on the ground (fixed wrt the robot) -->
   <link name="aux_link">
     </link>
@@ -243,7 +139,7 @@
     <child link="left_wheel"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.0" friction="0.0"/>
-    <limit effort="30.0" lower="-inf" upper="inf" velocity="100.0"/>
+    <limit effort="30.0" lower="-1e+25" upper="1e+25" velocity="100.0"/>
   </joint>
   <link name="left_wheel">
     <!-- wheel visual -->
@@ -271,7 +167,7 @@
     <child link="right_wheel"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.0" friction="0.0"/>
-    <limit effort="30.0" lower="-inf" upper="inf" velocity="100.0"/>
+    <limit effort="30.0" lower="-1e+25" upper="1e+25" velocity="100.0"/>
   </joint>
   <link name="right_wheel">
     <!-- wheel visual -->

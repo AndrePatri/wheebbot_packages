@@ -19,8 +19,8 @@ def generate_launch_description():
     
     package_share_path = get_package_share_path('wheebbot')
 
-    default_model_path = package_share_path/'description/urdf/wheebbot_ign.urdf.xacro'
-    default_rviz_config_path = package_share_path/'rviz/wheebbot.rviz'
+    default_model_path = package_share_path/'/urdf/wheebbot_full.urdf.xacro'
+    default_rviz_config_path = package_share_path/'/config/rviz/wheebbot.rviz'
 
     use_sim_time = LaunchConfiguration('use_sim_time', default = 'false')
 
@@ -29,11 +29,10 @@ def generate_launch_description():
             default_value = 'false',
             description = 'Use simulation (Gazebo) clock if true')
 
-    model_arg = DeclareLaunchArgument(name = 'model', default_value = str(default_model_path),
-                                      description = 'Absolute path to robot urdf file')
-
-    rviz_arg = DeclareLaunchArgument(name ='rvizconfig', default_value = str(default_rviz_config_path),
-                                     description = 'Absolute path to rviz config file')
+    model_arg = DeclareLaunchArgument(name='model', default_value=str(default_model_path),
+                                      description='Absolute path to robot urdf file')
+    rviz_arg = DeclareLaunchArgument(name='rvizconfig', default_value=str(default_rviz_config_path),
+                                             description='Absolute path to rviz config file')
 
     robot_description = ParameterValue(Command(['xacro ', LaunchConfiguration('model')]),
                                        value_type = str)

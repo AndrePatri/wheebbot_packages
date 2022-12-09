@@ -3,9 +3,9 @@
 
   <world name="wheebbot_ign_world">
 
-    <include>
+<!--    <include>
       <uri>model://my_custom_ground_plane_ign</uri>
-    </include>
+    </include-->>
   
     <scene>
       <grid>true</grid>

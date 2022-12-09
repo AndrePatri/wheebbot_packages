@@ -18,10 +18,10 @@ from launch.conditions import IfCondition
 
 def generate_launch_description():
 
-    package_share_path = get_package_share_path('wheebbot')
+    package_share_path = get_package_share_path('wheebbot_description')
 
-    default_model_path = package_share_path/'description/urdf/wheebbot.urdf.xacro'
-    default_rviz_config_path = package_share_path/'rviz/wheebbot.rviz'
+    default_model_path = package_share_path/'/urdf/wheebbot_full.urdf.xacro'
+    default_rviz_config_path = package_share_path/'/config/rviz/wheebbot.rviz'
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
@@ -36,7 +36,7 @@ def generate_launch_description():
                                      description='Absolute path to rviz config file')
       
 
-    robot_description = ParameterValue(Command(['xacro ', LaunchConfiguration('model')]),
+    robot_description = ParameterValue(Command(['xacro', LaunchConfiguration('model'), 'floating_joint:=false', 'is_gazebo_classic:=true']),
                                        value_type=str)
 
     robot_state_publisher_node = Node(

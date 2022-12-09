@@ -11,9 +11,11 @@ from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
-    package_share_path = get_package_share_path('wheebbot')
-    default_model_path = package_share_path/'description/urdf/wheebbot.urdf.xacro'
-    default_rviz_config_path = package_share_path/'rviz/wheebbot.rviz'
+
+    package_share_path = get_package_share_path('wheebbot_description')
+
+    default_model_path = package_share_path/'urdf/wheebbot_full.urdf.xacro'
+    default_rviz_config_path = package_share_path/'config/rviz/wheebbot.rviz'
 
     gui_arg = DeclareLaunchArgument(name='gui', default_value='true', choices=['true', 'false'],
                                     description='Flag to enable joint_state_publisher_gui')

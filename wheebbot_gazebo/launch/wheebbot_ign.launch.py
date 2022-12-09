@@ -39,9 +39,9 @@ from ament_index_python.packages import get_package_share_path
 def generate_launch_description():
 
     package_share_path = get_package_share_path('wheebbot_description')
-    default_model_path = package_share_path/'urdf/wheebbot.urdf.xacro'
+    default_model_path = package_share_path/'urdf/wheebbot_full.urdf.xacro'
     robot_description = ParameterValue(Command(['xacro ', LaunchConfiguration('model'),\
-                                                ' is_gazebo_classic:=false']),
+                                                ' is_floating_base:=true']),
                                        value_type=str)
     default_rviz_config_path = package_share_path/'rviz/wheebbot.rviz'
 
@@ -64,7 +64,7 @@ def generate_launch_description():
                                 description='Set to "false" to run headless.')
     run_headless_arg=DeclareLaunchArgument('headless', default_value='false',
                                 description='Set to "true" to run headless (only server).')
-    verbosity_arg=DeclareLaunchArgument('verbose', default_value='1',
+    verbosity_arg=DeclareLaunchArgument('verbose', default_value='4',
                                 description='Output verbosity (0-4), defaults to 1.')                         
     world_arg=DeclareLaunchArgument('world', default_value='wheebbot_ign.world',
                                 description='World to be loaded (its location needs to be in IGN_GAZEBO_RESOURCE_PATH)') 
@@ -87,7 +87,7 @@ def generate_launch_description():
             additional_env = env,
     )
 
-    spawn_entity_node = Node(package = 'ros_ign_gazebo', executable = 'create',
+    spawn_entity_node = Node(package = 'ros_gz_sim', executable = 'create',
                 arguments=[
                     '-name', 'wheebbot',
                     '-topic', 'robot_description',
@@ -96,13 +96,13 @@ def generate_launch_description():
                 )
 
     ros_ign_bridge_node = Node(
-        package = 'ros_ign_bridge',
+        package = 'ros_gz_bridge',
         executable = 'parameter_bridge',
         arguments=[
                 # Clock (IGN -> ROS2)
-                '/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
+                '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
                 # Joint states (IGN -> ROS2)
-                '/world/wheebbot_ign_world/model/wheebbot/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
+                '/world/wheebbot_ign_world/model/wheebbot/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
                 ],
         remappings=[
             ('/world/wheebbot_ign_world/model/wheebbot/joint_state', 'joint_states'),
@@ -114,7 +114,7 @@ def generate_launch_description():
         package='robot_state_publisher',
         executable='robot_state_publisher',
         name='robot_state_publisher',
-        parameters=[{'use_sim_time': use_sim_time,'robot_description': robot_description}],
+        parameters=[{'use_sim_time': use_sim_time, 'robot_description': robot_description}],
     )
 
     rviz_node = Node(

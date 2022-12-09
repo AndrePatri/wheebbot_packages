@@ -4,7 +4,7 @@
   <!-- Reading some parameters from a YAML config file -->
 
   <xacro:property name="yaml_file" value="$(find wheebbot_description)/config/urdf_params.yaml" />
-  <xacro:property name="props" value="${load_yaml(yaml_file)}"/>
+  <xacro:property name="props" value="${xacro.load_yaml(yaml_file)}"/>
 
   <!-- Assigning those parameters to xacro properties -->
 

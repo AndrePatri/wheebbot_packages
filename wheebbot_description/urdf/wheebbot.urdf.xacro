@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="wheebbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
     
-  <xacro:macro name="ign_or_gazebo" params="is_gazebo_classic" >
+  <xacro:macro name="ign_or_gazebo" params="is_gazebo_classic:=false" >
 
     <!-- Including the parameters file -->
     <xacro:include filename="$(find wheebbot_description)/urdf/parameters.urdf.xacro" />
@@ -42,7 +42,7 @@
       <visual>
         <origin xyz="0 ${box_ly/2-leg_extrusion_l_edge/2} ${-(box_lz/2-leg_extrusion_l_edge/2)}" rpy="0 0 ${-pi/2}" />
         <geometry>
-          <mesh filename="package://wheebbot_description/meshes/full_no_knee_no_wheels.dae" scale="1.0 1.0 1.0" />
+          <mesh filename="package://wheebbot_description/urdf/meshes/full_no_knee_no_wheels.dae" scale="1.0 1.0 1.0" />
         </geometry>
       </visual>
 
@@ -148,7 +148,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 ${pi/2}" />
         <geometry>
-          <mesh filename="package://wheebbot_description/meshes/wheel_black.dae" scale="1.0 1.0 1.0" />
+          <mesh filename="package://wheebbot_description/urdf/meshes/wheel_black.dae" scale="1.0 1.0 1.0" />
         </geometry>
       </visual>
 
@@ -180,7 +180,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 ${-pi/2}" />
         <geometry>
-          <mesh filename="package://wheebbot_description/meshes/wheel_black.dae" scale="1.0 1.0 1.0" />
+          <mesh filename="package://wheebbot_description/urdf/meshes/wheel_black.dae" scale="1.0 1.0 1.0" />
         </geometry>
       </visual>
 
